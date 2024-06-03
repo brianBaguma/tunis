@@ -137,9 +137,8 @@ const Contact = () => {
       },
       body: JSON.stringify(formValues),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
+      .then((response) => {
+        if (response.status === 200) {
           toast.success("Message Sent Successfully!", {
             position: "top-right",
             autoClose: 2000,
@@ -148,10 +147,10 @@ const Contact = () => {
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-          });
+          })
           document.getElementById("myForm").reset();
         } else {
-          throw new Error(data.message || "Unknown error occurred");
+          throw new Error("Unknown error occurred");
         }
       })
       .catch((error) => {
